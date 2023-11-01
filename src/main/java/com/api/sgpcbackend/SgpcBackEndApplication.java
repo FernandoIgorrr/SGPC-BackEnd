@@ -8,7 +8,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
-public class SgpcBackEndApplication {
+public class SgpcBackEndApplication
+{
 
     public static void main(String[] args)
     {

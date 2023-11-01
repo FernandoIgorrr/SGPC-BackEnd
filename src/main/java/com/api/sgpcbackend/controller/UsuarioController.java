@@ -24,11 +24,20 @@ public class UsuarioController
         this.encoder            = encoder;
     }
 
-    private ResponseEntity<UsuarioModel> cadastrar(@RequestBody UsuarioModel usuario)
+    @GetMapping("/listar")
+    public ResponseEntity<List<UsuarioModel>> listar()
+    {
+        return ResponseEntity.ok(repository.findAll());
+    }
+
+    @PostMapping("/cadastrar")
+    public ResponseEntity<UsuarioModel> cadastrar(@RequestBody UsuarioModel usuario)
     {
         usuario.setSenha(encoder.encode(usuario.getSenha()));
         return ResponseEntity.ok(repository.save(usuario));
     }
+
+
 
     @GetMapping("/validar_senha")
     public ResponseEntity<Boolean> validarSenha(
