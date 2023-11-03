@@ -6,20 +6,18 @@ import lombok.*;
 
 @Data
 @Table(name = "bolsista")
-@Getter
-@Entity
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(of = {"matricula"}, callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
 public class BolsistaModel extends UsuarioModel{
 
     private static final long serialVersionUID = 1L;
 
+    @Id
     @NotNull(message = "A matricula do bolsista deve ser preenchida")
     @Column(name = "matricula", length = 12, unique = true)
     private String matricula;
 
     @NotNull(message = "O tipo do bolsista deve ser escolhido")
-    @Column(name = "tipo_bolsista")
     private Short tipo_bolsista;
 }

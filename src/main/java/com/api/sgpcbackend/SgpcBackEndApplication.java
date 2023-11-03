@@ -34,8 +34,8 @@ public class SgpcBackEndApplication
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
 
-        mailSender.setUsername("");
-        mailSender.setPassword("");
+        mailSender.setUsername("olariumsystemlabs@gmail.com");
+        mailSender.setPassword("ikku yitn wktd ykvy");
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");

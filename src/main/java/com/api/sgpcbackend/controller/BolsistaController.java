@@ -4,14 +4,12 @@ import com.api.sgpcbackend.model.BolsistaModel;
 import com.api.sgpcbackend.repository.BolsistaRepository;
 import com.api.sgpcbackend.service.EmailService;
 import com.api.sgpcbackend.service.UsuarioService;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/bolsista")
@@ -21,9 +19,9 @@ public class BolsistaController
     private final PasswordEncoder encoder;
     private final EmailService emailService;
     public BolsistaController(BolsistaRepository repository, PasswordEncoder encoder, EmailService emailService) {
-        this.repository = repository;
-        this.encoder    = encoder;
-        this.emailService = emailService;
+        this.repository             = repository;
+        this.encoder                = encoder;
+        this.emailService           = emailService;
     }
 
     @GetMapping("/listar")
@@ -61,7 +59,7 @@ public class BolsistaController
         System.out.println("\n\nSENHA TEMPORÁRIA:*******************\n" + senha_temporaria + "\n\n");
         bolsista.setSenha(senha_temporaria);
         bolsista.setSenha(encoder.encode(bolsista.getSenha()));
-        bolsista.setTipo_usuario( (short)1 );
+        //bolsista.setTipo_usuario( (short)1 );
         bolsista.setStatus(true);
 
         repository.save(bolsista);

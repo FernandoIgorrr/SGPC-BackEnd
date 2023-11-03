@@ -1,11 +1,10 @@
 package com.api.sgpcbackend.repository;
 
 import com.api.sgpcbackend.model.BolsistaModel;
-import com.api.sgpcbackend.model.UsuarioModel;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
 public interface BolsistaRepository extends JpaRepository<BolsistaModel, String>
 {
     public boolean existsAllByLogin(String login);

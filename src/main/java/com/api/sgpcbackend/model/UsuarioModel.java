@@ -1,6 +1,7 @@
 package com.api.sgpcbackend.model;
 
 import com.api.sgpcbackend.model.TabelaBase.NivelAcessoModel;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -12,8 +13,6 @@ import java.time.LocalDate;
 
 @Data
 @Table(name = "usuario")
-@Getter
-@Setter
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @EqualsAndHashCode(of = {"id"})
@@ -50,9 +49,7 @@ public abstract class UsuarioModel implements Serializable
     @Column(name = "ativo")
     private Boolean status;
 
-    //@Column(name = "nivel_acesso")
-    //@NotNull(message = "Selecione o nível de acesso do usuário")
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "nivel_acesso")
     private NivelAcessoModel nivel_acesso;
 
