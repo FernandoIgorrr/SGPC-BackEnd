@@ -1,11 +1,12 @@
 package com.api.sgpcbackend.repository;
 
-import com.api.sgpcbackend.model.UsuarioModel;
+import com.api.sgpcbackend.domain.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.Optional;
+import org.springframework.security.core.userdetails.UserDetails;
 
-public interface UsuarioRepository extends JpaRepository<UsuarioModel,Long>
+import java.util.UUID;
+
+public interface UsuarioRepository extends JpaRepository<Usuario, UUID>
 {
-    public Optional<UsuarioModel> findByLogin(String login);
-
+    public UserDetails findByLogin(String login);
 }
