@@ -11,15 +11,15 @@ import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
-public record BolsistaRegistroDTO (String login,
-                                   String matricula,
-                                   String nome,
-                                   String email,
-                                   String telefone,
-                                   TipoBolsista tipoBolsista,
-                                   LocalDate data_chegada,
-                                   LocalDate data_saida
-                                    )
+public record BolsistaRegistroDTO (
+        String login,
+        String matricula,
+        String nome,
+        String email,
+        String telefone,
+        LocalDate data_chegada,
+        LocalDate data_saida
+        )
 {
 
 }

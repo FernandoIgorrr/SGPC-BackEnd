@@ -1,9 +1,11 @@
 package com.api.sgpcbackend.domain.model.patrimonio.computador.espec;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "os_pc")
+@NoArgsConstructor
 public class SistemaOperacional
 {
     @Id
@@ -13,4 +15,9 @@ public class SistemaOperacional
 
     @Column(name = "descricao")
     private String descricao;
+
+    public SistemaOperacional(Integer id)
+    {
+        this.id = id;
+    }
 }

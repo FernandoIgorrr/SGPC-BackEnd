@@ -68,7 +68,7 @@ public class Usuario implements Serializable, UserDetails
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate data_chegada;
 
-    @Column(name = "data_saida", table = "usuario")
+    @Column(name = "data_saida")
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate data_saida;
 

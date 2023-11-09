@@ -1,10 +1,12 @@
 package com.api.sgpcbackend.domain.model.patrimonio.localidade;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 
 @Entity
 @Table(name = "comodo")
+@NoArgsConstructor
 public class Comodo
 {
     @Id
@@ -18,4 +20,9 @@ public class Comodo
     @ManyToOne
     @JoinColumn(name = "andar")
     private Andar andar;
+
+    public Comodo(Integer id)
+    {
+        this.id = id;
+    }
 }

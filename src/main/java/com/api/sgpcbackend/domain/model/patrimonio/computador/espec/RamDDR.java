@@ -1,9 +1,11 @@
 package com.api.sgpcbackend.domain.model.patrimonio.computador.espec;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "ram_ddr_pc")
+@NoArgsConstructor
 public class RamDDR
 {
     @Id
@@ -13,4 +15,9 @@ public class RamDDR
 
     @Column(name = "descricao")
     private String descricao;
+
+    public RamDDR(Integer id)
+    {
+        this.id = id;
+    }
 }

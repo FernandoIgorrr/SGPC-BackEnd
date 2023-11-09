@@ -1,5 +1,6 @@
 package com.api.sgpcbackend.domain.model.patrimonio;
 
+import com.api.sgpcbackend.domain.dto.patrimonio.PatrimonioCadastroDTO;
 import com.api.sgpcbackend.domain.model.patrimonio.localidade.Comodo;
 import com.api.sgpcbackend.domain.roles.EstadoPatrimonio;
 import com.api.sgpcbackend.domain.roles.TipoPatrimonio;
@@ -16,7 +17,7 @@ import java.util.UUID;
 @Table(name = "patrimonio")
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.INTEGER)
+//@DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.INTEGER)
 @AllArgsConstructor
 @NoArgsConstructor
 public class Patrimonio implements Serializable
@@ -26,27 +27,37 @@ public class Patrimonio implements Serializable
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
-    private UUID id;
+    protected UUID id;
 
     @NotNull(message = "É necessário preencher o campo tombamento")
     @Column(name = "tombamento", unique = true)
-    private String tombamento;
+    protected String tombamento;
 
     @Column(name = "descricao")
-    private String descricao;
+    protected String descricao;
 
     @ManyToOne
     @JoinColumn(name = "estado")
-    private EstadoPatrimonio estado;
+    protected EstadoPatrimonio estado;
 
     @ManyToOne
-    @JoinColumn(name = "tipo", insertable = false, updatable = false)
-    private TipoPatrimonio tipo;
+    @JoinColumn(name = "tipo")
+    protected TipoPatrimonio tipo;
 
     @ManyToOne
     @JoinColumn(name = "localidade")
-    private Comodo localidade;
+    protected Comodo localidade;
 
     @Column(name = "alienado")
-    private Boolean alienado;
+    protected Boolean alienado;
+
+    public Patrimonio(PatrimonioCadastroDTO dto)
+    {
+        tombamento  = dto.tombamento();
+        descricao   = dto.descricao();
+        estado      = new EstadoPatrimonio(dto.estado());
+        tipo        = new TipoPatrimonio(dto.tipo());
+        localidade  = new Comodo(dto.localidade());
+        alienado    = false;
+    }
 }

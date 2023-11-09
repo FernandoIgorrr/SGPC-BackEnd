@@ -1,9 +1,10 @@
 package com.api.sgpcbackend.controller;
 
-import com.api.sgpcbackend.domain.model.Bolsista;
+import com.api.sgpcbackend.domain.model.patrimonio.Computador;
+import com.api.sgpcbackend.domain.dto.patrimonio.ComputadorCadastroDTO;
 import com.api.sgpcbackend.domain.model.patrimonio.Patrimonio;
-import com.api.sgpcbackend.domain.model.patrimonio.PatrimonioCadastrarDTO;
-import com.api.sgpcbackend.domain.roles.EstadoPatrimonio;
+import com.api.sgpcbackend.domain.dto.patrimonio.PatrimonioCadastroDTO;
+import com.api.sgpcbackend.repository.ComputadorRepository;
 import com.api.sgpcbackend.repository.PatrimonioRepository;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -22,6 +23,9 @@ public class PatrimonioController
     @Autowired
     private PatrimonioRepository repository;
 
+    @Autowired
+    private ComputadorRepository computadorRepository;
+
     private Logger logger = LoggerFactory.getLogger(PatrimonioController.class);
 
     @GetMapping("/exemplo")
@@ -39,16 +43,29 @@ public class PatrimonioController
     }
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<String> cadastrar(@RequestBody @Valid PatrimonioCadastrarDTO dto)
+    public ResponseEntity<String> cadastrar(@RequestBody @Valid PatrimonioCadastroDTO dto)
     {
-        Patrimonio patrimonio = new Patrimonio();
+        Patrimonio patrimonio = new Patrimonio(dto);
 
-        patrimonio.setTombamento(dto.getTombamento());
-        patrimonio.setDescricao(dto.getDescricao());
-        patrimonio.setEstado(new EstadoPatrimonio());
-
+        if(repository.existsAllByTombamento(patrimonio.getTombamento()))
+            return new ResponseEntity<>("Tombamento já cadastrado", HttpStatus.CONFLICT);
 
         repository.save(patrimonio);
         return new ResponseEntity<>("Patrimônio cadastrado com sucesso", HttpStatus.CREATED);
+    }
+
+    @PostMapping("/computador/cadastrar")
+    public ResponseEntity<String> cadastrar_pc(@RequestBody @Valid ComputadorCadastroDTO dto)
+    {
+        Computador computador = new Computador(dto);
+
+        if(repository.existsAllByTombamento(computador.getTombamento()))
+            return new ResponseEntity<>("Tombamento já cadastrado", HttpStatus.CONFLICT);
+        if(computadorRepository.existsAllBySerial(computador.getSerial()))
+            return new ResponseEntity<>("Serial já cadastrado", HttpStatus.CONFLICT);
+
+        computadorRepository.save(computador);
+
+        return new ResponseEntity<>("Computador cadastrado com sucesso", HttpStatus.CREATED);
     }
 }

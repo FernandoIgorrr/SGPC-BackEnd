@@ -1,9 +1,12 @@
 package com.api.sgpcbackend.domain.roles;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Entity
 @Table(name = "tipo_patrimonio")
+@NoArgsConstructor
 public class TipoPatrimonio
 {
     @Id
@@ -12,4 +15,9 @@ public class TipoPatrimonio
 
     @Column(name = "descricao")
     private String descricao;
+
+    public TipoPatrimonio(Integer id)
+    {
+        this.id = id;
+    }
 }

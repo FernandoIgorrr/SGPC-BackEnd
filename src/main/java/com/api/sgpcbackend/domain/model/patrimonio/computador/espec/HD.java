@@ -1,9 +1,11 @@
 package com.api.sgpcbackend.domain.model.patrimonio.computador.espec;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "hd_pc")
+@NoArgsConstructor
 public class HD
 {
     @Id
@@ -13,4 +15,9 @@ public class HD
 
     @Column(name = "descricao")
     private String descricao;
+
+    public HD(Integer id)
+    {
+        this.id = id;
+    }
 }
