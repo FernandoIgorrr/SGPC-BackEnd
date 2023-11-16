@@ -2,12 +2,14 @@ package com.api.sgpcbackend.domain.model.patrimonio.computador.espec;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "modelo_pc")
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class Modelo
 {
     @Id

@@ -1,10 +1,14 @@
 package com.api.sgpcbackend.controller;
 
+import com.api.sgpcbackend.domain.dto.patrimonio.ComputadorListarDTO;
+import com.api.sgpcbackend.domain.dto.patrimonio.PatrimonioListarDTO;
 import com.api.sgpcbackend.domain.model.patrimonio.Computador;
 import com.api.sgpcbackend.domain.dto.patrimonio.ComputadorCadastroDTO;
 import com.api.sgpcbackend.domain.model.patrimonio.Patrimonio;
 import com.api.sgpcbackend.domain.dto.patrimonio.PatrimonioCadastroDTO;
+import com.api.sgpcbackend.repository.ComputadorListarDTORepository;
 import com.api.sgpcbackend.repository.ComputadorRepository;
+import com.api.sgpcbackend.repository.PatrimonioListarDTORepository;
 import com.api.sgpcbackend.repository.PatrimonioRepository;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -24,7 +28,13 @@ public class PatrimonioController
     private PatrimonioRepository repository;
 
     @Autowired
+    private PatrimonioListarDTORepository dtoRepository;
+
+    @Autowired
     private ComputadorRepository computadorRepository;
+
+    @Autowired
+    private ComputadorListarDTORepository computadorDTORepository;
 
     private Logger logger = LoggerFactory.getLogger(PatrimonioController.class);
 
@@ -37,9 +47,16 @@ public class PatrimonioController
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<Patrimonio>> listar()
+    public ResponseEntity<List<PatrimonioListarDTO>> listar()
     {
-        return ResponseEntity.ok(repository.findAll());
+
+        return ResponseEntity.ok(dtoRepository.findAll());
+    }
+
+    @GetMapping("/computador/listar")
+    public ResponseEntity<List<ComputadorListarDTO>> listarComputador()
+    {
+        return ResponseEntity.ok(computadorDTORepository.findAll());
     }
 
     @PostMapping("/cadastrar")

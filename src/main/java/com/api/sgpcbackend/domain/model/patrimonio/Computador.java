@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @DiscriminatorValue(value = "2205")
 public class Computador extends Patrimonio
 {
-    private static final long serialVersionUID = 1L;
+    //private static final long serialVersionUID = 1L;
 
     @Column(name = "serialpc", unique = true)
     private String serial;

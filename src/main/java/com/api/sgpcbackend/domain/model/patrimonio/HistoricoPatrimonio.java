@@ -12,11 +12,11 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Data
-@Table(name = "historico_manejo")
+@Table(name = "historico_patrimonio")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class HistoricoManejo
+public class HistoricoPatrimonio
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,4 +1,6 @@
 package com.api.sgpcbackend.domain.dto;
 
-public record BolsistaListarDTO() {
+public record BolsistaListarDTO()
+{
+
 }

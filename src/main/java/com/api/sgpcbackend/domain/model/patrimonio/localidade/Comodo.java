@@ -1,12 +1,16 @@
 package com.api.sgpcbackend.domain.model.patrimonio.localidade;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
 @Entity
 @Table(name = "comodo")
 @NoArgsConstructor
+@Data
+@AllArgsConstructor
 public class Comodo
 {
     @Id

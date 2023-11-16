@@ -1,12 +1,16 @@
 package com.api.sgpcbackend.domain.roles;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Entity
+@Data
 @Table(name = "tipo_patrimonio")
 @NoArgsConstructor
+@AllArgsConstructor
 public class TipoPatrimonio
 {
     @Id

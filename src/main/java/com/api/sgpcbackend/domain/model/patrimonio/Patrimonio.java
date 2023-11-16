@@ -2,6 +2,7 @@ package com.api.sgpcbackend.domain.model.patrimonio;
 
 import com.api.sgpcbackend.domain.dto.patrimonio.PatrimonioCadastroDTO;
 import com.api.sgpcbackend.domain.model.patrimonio.localidade.Comodo;
+import com.api.sgpcbackend.domain.model.patrimonio.localidade.Localidade;
 import com.api.sgpcbackend.domain.roles.EstadoPatrimonio;
 import com.api.sgpcbackend.domain.roles.TipoPatrimonio;
 import jakarta.persistence.*;
@@ -47,6 +48,7 @@ public class Patrimonio implements Serializable
     @ManyToOne
     @JoinColumn(name = "localidade")
     protected Comodo localidade;
+
 
     @Column(name = "alienado")
     protected Boolean alienado;

@@ -35,12 +35,12 @@ public class Manejo
     private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name = "comodo")
+    @JoinColumn(name = "comodo_anterior")
     @NotNull()
     private Comodo localidade_anterior;
 
     @ManyToOne
-    @JoinColumn(name = "comodo")
+    @JoinColumn(name = "comodo_posterior")
     @NotNull()
     private Comodo localidade_posterior;
 
