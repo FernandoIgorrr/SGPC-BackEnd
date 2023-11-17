@@ -16,7 +16,7 @@ public class Comodo
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Short id;
 
     @Column(name = "nome")
     private String nome;
@@ -25,7 +25,7 @@ public class Comodo
     @JoinColumn(name = "andar")
     private Andar andar;
 
-    public Comodo(Integer id)
+    public Comodo(Short id)
     {
         this.id = id;
     }

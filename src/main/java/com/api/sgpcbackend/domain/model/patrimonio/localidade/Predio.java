@@ -9,14 +9,13 @@ import lombok.NoArgsConstructor;
 @Table(name = "predio")
 @Data
 @NoArgsConstructor
-
 @AllArgsConstructor
 public class Predio
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Short id;
 
     @Column(name = "nome")
     private String nome;

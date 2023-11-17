@@ -1,6 +1,7 @@
 package com.api.sgpcbackend.controller;
 
 
+import com.api.sgpcbackend.domain.dto.SupervisorCadastroDTO;
 import com.api.sgpcbackend.domain.model.Bolsista;
 import com.api.sgpcbackend.domain.model.Supervisor;
 import com.api.sgpcbackend.repository.SupervisorRepository;
@@ -35,13 +36,14 @@ public class SupervisorController
     }
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<String> cadastrar(@RequestBody @Valid Supervisor supervisor)
+    public ResponseEntity<String> cadastrar(@RequestBody @Valid SupervisorCadastroDTO supervisorDTO)
     {
-        return  cadastrar_(supervisor);
+        return  cadastrar_(supervisorDTO);
     }
-    private ResponseEntity<String> cadastrar_(Supervisor supervisor)
+    private ResponseEntity<String> cadastrar_(SupervisorCadastroDTO supervisorDTO)
 
     {
+        Supervisor supervisor = new Supervisor(supervisorDTO);
 
         if(repository.existsAllByEmail((supervisor.getEmail())))
             return new ResponseEntity<>("E-mail já cadastrado", HttpStatus.CONFLICT);
@@ -51,7 +53,7 @@ public class SupervisorController
         String senha_temporaria = PasswordService.gerarSenhaTemporaria();
         System.out.println("\n\nSENHA TEMPORÁRIA:*******************\n" + senha_temporaria + "\n\n");
         supervisor.setSenha(encoder.encode(senha_temporaria));
-        supervisor.setAtvio(true);
+        //supervisor.setAtvio(true);
 
         repository.save(supervisor);
 

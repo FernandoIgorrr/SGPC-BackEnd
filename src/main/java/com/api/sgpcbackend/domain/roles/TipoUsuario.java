@@ -1,15 +1,26 @@
 package com.api.sgpcbackend.domain.roles;
 
-public enum TipoUsuario
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@Table(name = "tipo_usuario")
+@NoArgsConstructor
+@AllArgsConstructor
+public class TipoUsuario
 {
-    BOLSISTA("bolsista"),
-    SUPERVISOR("supervisor");
-    private String tipo;
-    TipoUsuario(String tipo){
-        this.tipo = tipo;
-    }
-    public String getTipo()
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(name = "descricao")
+    private String descricao;
+
+    public TipoUsuario(Integer id)
     {
-        return tipo;
+        this.id = id;
     }
 }

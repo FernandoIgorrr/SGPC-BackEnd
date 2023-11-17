@@ -15,12 +15,12 @@ public class SistemaOperacional
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Short id;
 
     @Column(name = "descricao")
     private String descricao;
 
-    public SistemaOperacional(Integer id)
+    public SistemaOperacional(Short id)
     {
         this.id = id;
     }

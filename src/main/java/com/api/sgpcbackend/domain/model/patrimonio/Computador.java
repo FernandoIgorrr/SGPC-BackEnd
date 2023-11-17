@@ -11,16 +11,19 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+
 @Entity
 @Data
 @Table(name = "patrimonio_pc")
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@DiscriminatorValue(value = "2205")
+//@DiscriminatorValue(value = "2205")
 public class Computador extends Patrimonio
 {
-    //private static final long serialVersionUID = 1L;
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @Column(name = "serialpc", unique = true)
     private String serial;
@@ -47,15 +50,14 @@ public class Computador extends Patrimonio
 
     public Computador(ComputadorCadastroDTO dto)
     {
-
         tombamento  = dto.tombamento();
         descricao   = dto.descricao();
         estado      = new EstadoPatrimonio(dto.estado());
-        tipo        = new TipoPatrimonio(2205);
+        tipo        = new TipoPatrimonio((short)2205);
         localidade  = new Comodo(dto.localidade());
         alienado    = false;
 
-        //---------------
+        //----------------------------------------------------------------------
 
         serial              = dto.serial();
         modelo              = new Modelo(dto.modelo());

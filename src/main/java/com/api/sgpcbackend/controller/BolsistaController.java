@@ -1,5 +1,6 @@
 package com.api.sgpcbackend.controller;
 
+import com.api.sgpcbackend.domain.dto.BolsistaCadastroDTO;
 import com.api.sgpcbackend.domain.model.Bolsista;
 import com.api.sgpcbackend.repository.BolsistaRepository;
 import com.api.sgpcbackend.service.EmailService;
@@ -33,13 +34,15 @@ public class BolsistaController
     }
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<String> cadastrar(@RequestBody @Valid Bolsista bolsista)
+    public ResponseEntity<String> cadastrar(@RequestBody @Valid BolsistaCadastroDTO bolsistaDTO)
     {
-        return cadastrar_(bolsista);
+        return cadastrar_(bolsistaDTO);
     }
 
-    public ResponseEntity<String> cadastrar_(Bolsista bolsista)
+    public ResponseEntity<String> cadastrar_(BolsistaCadastroDTO bolsistaDTO)
     {
+        Bolsista bolsista = new Bolsista(bolsistaDTO);
+
         if(repository.existsAllByMatricula(bolsista.getMatricula()))
             return new ResponseEntity<>("Matrícula já cadastrada", HttpStatus.CONFLICT);
         if(repository.existsAllByEmail((bolsista.getEmail())))
@@ -50,7 +53,7 @@ public class BolsistaController
         String senha_temporaria = PasswordService.gerarSenhaTemporaria();
         System.out.println("\n\nSENHA TEMPORÁRIA:*******************\n" + senha_temporaria + "\n\n");
         bolsista.setSenha(encoder.encode(senha_temporaria));
-        bolsista.setAtvio(true);
+        //bolsista.setAtvio(true);
 
         repository.save(bolsista);
 

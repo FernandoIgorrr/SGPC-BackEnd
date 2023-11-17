@@ -1,21 +1,26 @@
 package com.api.sgpcbackend.domain.roles;
 
-public enum TipoBolsista
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@Table(name = "tipo_bolsista")
+@NoArgsConstructor
+@AllArgsConstructor
+public class TipoBolsista
 {
-    GERENCIA("gerencia"),
-    DESIGN("design"),
-    AVALICAO("avaliacao"),
-    INFORMATICA("informatica");
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Short id;
 
-    private String tipo;
+    @Column(name = "descricao")
+    private String descricao;
 
-    TipoBolsista(String tipo)
+    public TipoBolsista(Short id)
     {
-        this.tipo = tipo;
-    }
-
-    public String getTipo()
-    {
-        return tipo;
+        this.id = id;
     }
 }

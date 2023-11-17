@@ -15,12 +15,12 @@ public class TipoPatrimonio
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Short id;
 
     @Column(name = "descricao")
     private String descricao;
 
-    public TipoPatrimonio(Integer id)
+    public TipoPatrimonio(Short id)
     {
         this.id = id;
     }

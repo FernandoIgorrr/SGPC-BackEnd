@@ -14,12 +14,12 @@ public class EstadoPatrimonio
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Short id;
 
     @Column(name = "descricao")
     private String descricao;
 
-    public EstadoPatrimonio(Integer id)
+    public EstadoPatrimonio(Short id)
     {
         this.id = id;
     }

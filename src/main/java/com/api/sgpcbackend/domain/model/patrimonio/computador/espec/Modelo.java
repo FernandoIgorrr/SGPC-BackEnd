@@ -15,12 +15,12 @@ public class Modelo
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Short id;
 
     @Column(name = "descricao")
     private String descricao;
 
-    public Modelo(Integer id)
+    public Modelo(Short id)
     {
         this.id = id;
     }

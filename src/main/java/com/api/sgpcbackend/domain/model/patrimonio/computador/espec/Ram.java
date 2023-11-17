@@ -15,12 +15,12 @@ public class Ram
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Short id;
 
     @Column(name = "descricao")
     private String descricao;
 
-    public Ram(Integer id)
+    public Ram(Short id)
     {
         this.id = id;
     }

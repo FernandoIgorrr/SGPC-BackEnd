@@ -2,21 +2,30 @@ package com.api.sgpcbackend.domain.dto.patrimonio;
 
 import com.api.sgpcbackend.domain.model.patrimonio.computador.espec.*;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import java.util.UUID;
 
 @Entity
 @Data
 @Table(name = "computadores_completo")
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class ComputadorListarDTO extends PatrimonioListarDTO
+@EqualsAndHashCode
+public class ComputadorListarDTO
 {
+    @Id
+    @Column(name = "id")
+    private UUID id;
 
-    @Column(name = "serialpc", unique = true)
+    @Column(name = "tombamento", unique = true)
+    private String tombamento;
+
+    @Column(name = "serial", unique = true)
     private String serial;
 
     @Column(name = "modelo")
@@ -33,4 +42,25 @@ public class ComputadorListarDTO extends PatrimonioListarDTO
 
     @Column(name = "hd")
     private String hd;
+
+    @Column(name = "descricao")
+    private String descricao;
+
+    @Column(name = "estado")
+    private String estado;
+
+    @Column(name = "alienado")
+    private Boolean alienado;
+
+    @Column(name = "comodo")
+    private String comodo;
+
+    @Column(name = "andar")
+    private String andar;
+
+    @Column(name = "predio")
+    private String predio;
+
+    @Column(name = "complexo")
+    private String complexo;
 }

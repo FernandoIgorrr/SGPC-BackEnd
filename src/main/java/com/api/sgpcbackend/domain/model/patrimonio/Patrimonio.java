@@ -2,7 +2,6 @@ package com.api.sgpcbackend.domain.model.patrimonio;
 
 import com.api.sgpcbackend.domain.dto.patrimonio.PatrimonioCadastroDTO;
 import com.api.sgpcbackend.domain.model.patrimonio.localidade.Comodo;
-import com.api.sgpcbackend.domain.model.patrimonio.localidade.Localidade;
 import com.api.sgpcbackend.domain.roles.EstadoPatrimonio;
 import com.api.sgpcbackend.domain.roles.TipoPatrimonio;
 import jakarta.persistence.*;
@@ -11,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -23,6 +23,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Patrimonio implements Serializable
 {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id

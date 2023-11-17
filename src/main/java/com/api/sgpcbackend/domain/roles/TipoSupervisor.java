@@ -1,4 +1,4 @@
-package com.api.sgpcbackend.domain.model.patrimonio.computador.espec;
+package com.api.sgpcbackend.domain.roles;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,21 +6,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "ram_ddr_pc")
-@NoArgsConstructor
 @Data
+@Table(name = "tipo_supervisor")
+@NoArgsConstructor
 @AllArgsConstructor
-public class RamDDR
+public class TipoSupervisor
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Short id;
 
     @Column(name = "descricao")
     private String descricao;
 
-    public RamDDR(Short id)
+    public TipoSupervisor(Short id)
     {
         this.id = id;
     }

@@ -12,6 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Collection;
@@ -23,11 +24,12 @@ import java.util.UUID;
 @EqualsAndHashCode(of = {"id"})
 @Table(name = "usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "tipo",discriminatorType=DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "tipo_usuario",discriminatorType = DiscriminatorType.INTEGER)
 @AllArgsConstructor
 @NoArgsConstructor
 public class Usuario implements Serializable, UserDetails
 {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -37,45 +39,45 @@ public class Usuario implements Serializable, UserDetails
 
     @Column(name = "login", length = 25, unique = true)
     @NotNull(message = "É necessário preencher o campo login")
-    private String login;
+    protected String login;
 
     //@Size(min = 8, message = "A senha deve ter no mínimo 8 caracters")
     @Column(name = "senha", length = 80)
     //@NotNull(message = "É necessário preencher o campo senha")
-    private String senha;
+    protected String senha;
 
     @Column(name = "nome", length = 100)
     @NotNull(message = "É necessário preencher o nome do usuário")
-    private String nome;
+    protected String nome;
 
     @Column(name = "email", length = 50, unique = true)
     @NotNull(message = "É necessário preencher o E-mail do usuário")
-    private String email;
+    protected String email;
 
     @Column(name = "telefone", length = 12)
-    private String telefone;
+    protected String telefone;
 
     @Column(name = "ativo")
-    private Boolean atvio;
+    protected Boolean atvio;
 
-    @Column(name = "tipo",insertable = false,updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "tipo_usuario",insertable = false,updatable = false)
    // @NotNull(message = "O tipo de usuário deve ser escolhido")
-    @Enumerated(EnumType.STRING)
-    private TipoUsuario tipo;
+    protected TipoUsuario tipo_usuario;
 
     @Column(name = "data_chegada")
     @NotNull(message = "A data de início das atividades do usuário deve ser inserida")
     @JsonFormat(pattern = "dd-MM-yyyy")
-    private LocalDate data_chegada;
+    protected LocalDate data_chegada;
 
     @Column(name = "data_saida")
     @JsonFormat(pattern = "dd-MM-yyyy")
-    private LocalDate data_saida;
+    protected LocalDate data_saida;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities()
     {
-        if(tipo == TipoUsuario.SUPERVISOR )
+        if(tipo_usuario.getId() == 1)
             return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
 
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));

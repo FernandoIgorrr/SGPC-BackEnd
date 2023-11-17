@@ -71,6 +71,24 @@ public class PatrimonioController
         return new ResponseEntity<>("Patrimônio cadastrado com sucesso", HttpStatus.CREATED);
     }
 
+    @PostMapping("/cadastrar_lista")
+    public ResponseEntity<String> cadastrar(@RequestBody @Valid List<PatrimonioCadastroDTO> dtos)
+    {
+        for (PatrimonioCadastroDTO dto: dtos)
+        {
+            try {
+                Patrimonio patrimonio = new Patrimonio(dto);
+
+                if (repository.existsAllByTombamento(patrimonio.getTombamento()))
+                    continue;
+                repository.save(patrimonio);
+            }catch (Exception ignored)
+            {}
+        }
+
+        return new ResponseEntity<>("Patrimônio cadastrado com sucesso", HttpStatus.CREATED);
+    }
+
     @PostMapping("/computador/cadastrar")
     public ResponseEntity<String> cadastrar_pc(@RequestBody @Valid ComputadorCadastroDTO dto)
     {
@@ -84,5 +102,25 @@ public class PatrimonioController
         computadorRepository.save(computador);
 
         return new ResponseEntity<>("Computador cadastrado com sucesso", HttpStatus.CREATED);
+    }
+
+    @PostMapping("/computador/cadastrar_lista")
+    public ResponseEntity<String> cadastrar_pc(@RequestBody @Valid List<ComputadorCadastroDTO> dtos)
+    {
+        for (ComputadorCadastroDTO dto: dtos)
+        {
+            try {
+                Computador computador = new Computador(dto);
+
+                if (repository.existsAllByTombamento(computador.getTombamento()))
+                    continue;
+                if (computadorRepository.existsAllBySerial(computador.getSerial()))
+                    continue;
+                computadorRepository.save(computador);
+            }catch (Exception ignored)
+            {}
+        }
+        System.out.println("TAMANHO DA LISTA NO FINAL: " + dtos.size());
+        return new ResponseEntity<>("Computadores cadastrados com sucesso", HttpStatus.CREATED);
     }
 }

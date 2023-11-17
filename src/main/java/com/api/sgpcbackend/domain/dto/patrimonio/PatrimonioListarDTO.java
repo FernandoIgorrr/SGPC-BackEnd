@@ -9,48 +9,47 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
 import java.util.UUID;
 
 @Data
 @Table(name = "patrimonios_completo")
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 @AllArgsConstructor
 @NoArgsConstructor
 public class PatrimonioListarDTO
 {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
-    protected UUID id;
+    private UUID id;
 
-    @NotNull(message = "É necessário preencher o campo tombamento")
     @Column(name = "tombamento", unique = true)
-    protected String tombamento;
+    private String tombamento;
 
     @Column(name = "descricao")
-    protected String descricao;
+    private String descricao;
 
     @Column(name = "estado")
-    protected String estado;
+    private String estado;
 
     @Column(name = "tipo")
-    protected String tipo;
+    private String tipo;
 
     @Column(name = "alienado")
-    protected Boolean alienado;
+    private Boolean alienado;
 
     @Column(name = "comodo")
-    protected String comodo;
+    private String comodo;
 
     @Column(name = "andar")
-    protected String andar;
+    private String andar;
 
     @Column(name = "predio")
-    protected String predio;
+    private String predio;
 
     @Column(name = "complexo")
-    protected String complexo;
+    private String complexo;
 }
