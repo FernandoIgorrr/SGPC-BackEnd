@@ -6,10 +6,13 @@ import com.api.sgpcbackend.domain.model.patrimonio.Computador;
 import com.api.sgpcbackend.domain.dto.patrimonio.ComputadorCadastroDTO;
 import com.api.sgpcbackend.domain.model.patrimonio.Patrimonio;
 import com.api.sgpcbackend.domain.dto.patrimonio.PatrimonioCadastroDTO;
+import com.api.sgpcbackend.domain.roles.EstadoPatrimonio;
+import com.api.sgpcbackend.domain.roles.TipoPatrimonio;
 import com.api.sgpcbackend.repository.ComputadorListarDTORepository;
 import com.api.sgpcbackend.repository.ComputadorRepository;
 import com.api.sgpcbackend.repository.PatrimonioListarDTORepository;
 import com.api.sgpcbackend.repository.PatrimonioRepository;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,6 +63,7 @@ public class PatrimonioController
     }
 
     @PostMapping("/cadastrar")
+    @Transactional
     public ResponseEntity<String> cadastrar(@RequestBody @Valid PatrimonioCadastroDTO dto)
     {
         Patrimonio patrimonio = new Patrimonio(dto);
@@ -69,6 +73,17 @@ public class PatrimonioController
 
         repository.save(patrimonio);
         return new ResponseEntity<>("Patrimônio cadastrado com sucesso", HttpStatus.CREATED);
+    }
+
+    @PutMapping("/atualizar")
+    @Transactional
+    public ResponseEntity<String> atualizar(@RequestBody @Valid PatrimonioCadastroDTO dto)
+    {
+        Patrimonio patrimonio = repository.getReferenceById(dto.id());
+
+        patrimonio.atualizar(dto);
+
+        return new ResponseEntity<>("Dados do patrimônio alterados com sucesso", HttpStatus.ACCEPTED);
     }
 
     @PostMapping("/cadastrar_lista")

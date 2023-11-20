@@ -6,6 +6,7 @@ import com.api.sgpcbackend.domain.model.Usuario;
 import com.api.sgpcbackend.service.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,7 +22,7 @@ public class AutentitacacaoController
     @Autowired
     private TokenService tokenService;
 
-    @PostMapping("/login")
+    @PostMapping(value = "/login")
     public ResponseEntity login(@RequestBody @Valid AutenticacaoDTO dados)
     {
         var userNamePassword = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());

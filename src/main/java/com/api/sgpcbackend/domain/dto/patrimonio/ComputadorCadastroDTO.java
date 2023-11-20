@@ -1,8 +1,9 @@
 package com.api.sgpcbackend.domain.dto.patrimonio;
 
-import com.api.sgpcbackend.domain.model.patrimonio.computador.espec.*;
+import java.util.UUID;
 
 public record ComputadorCadastroDTO(
+        UUID id,
         String tombamento,
         String descricao,
         Short estado,

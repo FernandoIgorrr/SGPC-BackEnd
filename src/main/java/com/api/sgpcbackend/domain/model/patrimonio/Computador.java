@@ -50,12 +50,12 @@ public class Computador extends Patrimonio
 
     public Computador(ComputadorCadastroDTO dto)
     {
-        tombamento  = dto.tombamento();
-        descricao   = dto.descricao();
-        estado      = new EstadoPatrimonio(dto.estado());
-        tipo        = new TipoPatrimonio((short)2205);
-        localidade  = new Comodo(dto.localidade());
-        alienado    = false;
+        tombamento          = dto.tombamento();
+        descricao           = dto.descricao();
+        estado              = new EstadoPatrimonio(dto.estado());
+        tipo_patrimonio     = new TipoPatrimonio((short)2205);
+        localidade          = new Comodo(dto.localidade());
+        alienado            = false;
 
         //----------------------------------------------------------------------
 

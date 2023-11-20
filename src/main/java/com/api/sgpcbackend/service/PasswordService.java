@@ -8,7 +8,7 @@ public class PasswordService
 {
     public static String gerarSenhaTemporaria()
     {
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~`!@#$%^&*()-_=+[{]}\\|;:\'\",<.>/?";
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~!@#$%^&*?";
         String pwd = RandomStringUtils.random( 8, characters );
         return pwd;
     }

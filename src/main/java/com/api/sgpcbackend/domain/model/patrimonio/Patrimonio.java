@@ -44,7 +44,7 @@ public class Patrimonio implements Serializable
 
     @ManyToOne
     @JoinColumn(name = "tipo")
-    protected TipoPatrimonio tipo;
+    protected TipoPatrimonio tipo_patrimonio;
 
     @ManyToOne
     @JoinColumn(name = "localidade")
@@ -56,11 +56,20 @@ public class Patrimonio implements Serializable
 
     public Patrimonio(PatrimonioCadastroDTO dto)
     {
-        tombamento  = dto.tombamento();
-        descricao   = dto.descricao();
-        estado      = new EstadoPatrimonio(dto.estado());
-        tipo        = new TipoPatrimonio(dto.tipo());
-        localidade  = new Comodo(dto.localidade());
-        alienado    = false;
+        tombamento      = dto.tombamento();
+        descricao       = dto.descricao();
+        estado          = new EstadoPatrimonio(dto.estado());
+        tipo_patrimonio = new TipoPatrimonio(dto.tipo());
+        localidade      = new Comodo(dto.localidade());
+        alienado        = false;
+    }
+
+    public void atualizar(PatrimonioCadastroDTO dto)
+    {
+        setTombamento(dto.tombamento());
+        setDescricao(dto.descricao());
+        setEstado(new EstadoPatrimonio(dto.estado()));
+        setTipo_patrimonio(new TipoPatrimonio(dto.tipo()));
+        setAlienado(dto.alienado());
     }
 }
