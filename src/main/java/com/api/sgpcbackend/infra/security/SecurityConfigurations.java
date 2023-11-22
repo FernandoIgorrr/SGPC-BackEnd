@@ -52,11 +52,14 @@ public class SecurityConfigurations
                         requestMatchers(HttpMethod.POST,"/api/patrimonio/cadastrar").hasRole("USER").
                         requestMatchers(HttpMethod.POST,"/api/patrimonio/atualizar").hasRole("USER").
                         requestMatchers(HttpMethod.POST,"/api/patrimonio/computador/cadastrar").hasRole("USER").
+
                         requestMatchers(HttpMethod.POST,"/api/patrimonio/computador/cadastrar_lista").hasRole("USER").
 
 
-                        requestMatchers(HttpMethod.GET,"/api/patrimonio/listar").permitAll().
-                        requestMatchers(HttpMethod.GET,"/api/patrimonio/computador/listar").permitAll().
+                        requestMatchers(HttpMethod.GET,"/api/patrimonio/listar").hasRole("USER").
+                        requestMatchers(HttpMethod.POST,"/api/patrimonio/estados_patrimonio").hasRole("USER").
+                        requestMatchers(HttpMethod.POST,"/api/patrimonio/tipos_patrimonio").hasRole("USER").
+                        requestMatchers(HttpMethod.GET,"/api/patrimonio/computador/listar").hasRole("USER").
 
 
                         anyRequest().authenticated()).

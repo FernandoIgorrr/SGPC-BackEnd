@@ -8,10 +8,7 @@ import com.api.sgpcbackend.domain.model.patrimonio.Patrimonio;
 import com.api.sgpcbackend.domain.dto.patrimonio.PatrimonioCadastroDTO;
 import com.api.sgpcbackend.domain.roles.EstadoPatrimonio;
 import com.api.sgpcbackend.domain.roles.TipoPatrimonio;
-import com.api.sgpcbackend.repository.ComputadorListarDTORepository;
-import com.api.sgpcbackend.repository.ComputadorRepository;
-import com.api.sgpcbackend.repository.PatrimonioListarDTORepository;
-import com.api.sgpcbackend.repository.PatrimonioRepository;
+import com.api.sgpcbackend.repository.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -29,6 +26,12 @@ public class PatrimonioController
 {
     @Autowired
     private PatrimonioRepository repository;
+
+    @Autowired
+    private EstadoPatrimoniosRepository estadoPatrimonioRepository;
+
+    @Autowired
+    private TipoPatrimonioRepository tipoPatrimonioRepository;
 
     @Autowired
     private PatrimonioListarDTORepository dtoRepository;
@@ -135,7 +138,21 @@ public class PatrimonioController
             }catch (Exception ignored)
             {}
         }
-        System.out.println("TAMANHO DA LISTA NO FINAL: " + dtos.size());
+        //System.out.println("TAMANHO DA LISTA NO FINAL: " + dtos.size());
         return new ResponseEntity<>("Computadores cadastrados com sucesso", HttpStatus.CREATED);
     }
+
+    @GetMapping("/estados_patrimonio")
+    ResponseEntity<List<EstadoPatrimonio>> estados_patrimonio()
+    {
+        return ResponseEntity.ok(estadoPatrimonioRepository.findAll());
+    }
+
+    @GetMapping("/tipos_patrimonio")
+    ResponseEntity<List<TipoPatrimonio>> tipos_patrimonio()
+    {
+        return ResponseEntity.ok(tipoPatrimonioRepository.findAll());
+    }
+
+
 }
