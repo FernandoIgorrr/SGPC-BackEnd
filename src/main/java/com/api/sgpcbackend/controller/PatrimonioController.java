@@ -39,18 +39,6 @@ public class PatrimonioController
     private EstadoPatrimoniosRepository estadoPatrimonioRepository;
 
     @Autowired
-    private ComplexoRepository complexoRepository;
-
-    @Autowired
-    private PredioRepository predioRepository;
-
-    @Autowired
-    private AndarRepository andarRepository;
-
-    @Autowired
-    private ComodoRepository comodoRepository;
-
-    @Autowired
     private TipoPatrimonioRepository tipoPatrimonioRepository;
 
     @Autowired
@@ -168,32 +156,7 @@ public class PatrimonioController
     }
 
     @GetMapping("/tipo/listar")
-    ResponseEntity<List<TipoPatrimonio>> tiposPatrimonio()
-    {
+    ResponseEntity<List<TipoPatrimonio>> tiposPatrimonio() {
         return ResponseEntity.ok(tipoPatrimonioRepository.findAll());
-    }
-
-    @GetMapping("/complexo/listar")
-    ResponseEntity<List<Complexo>> listarComplexos()
-    {
-        return ResponseEntity.ok(complexoRepository.findAll());
-    }
-
-    @GetMapping("/predio/listar")
-    ResponseEntity<List<Predio>> listarPredios(@RequestParam Short complexo)
-    {
-        return ResponseEntity.ok(predioRepository.findAllByComplexo(new Complexo(complexo)));
-    }
-
-    @GetMapping("/Andar/listar")
-    ResponseEntity<List<Andar>> listarAndares(@RequestParam Short predio)
-    {
-        return ResponseEntity.ok(andarRepository.findAllByPredio(new Predio(predio)));
-    }
-
-    @GetMapping("/Comodo/listar")
-    ResponseEntity<List<Comodo>> listarComodos(@RequestParam Short andar)
-    {
-        return ResponseEntity.ok(comodoRepository.findAllByAndar(new Andar(andar)));
     }
 }

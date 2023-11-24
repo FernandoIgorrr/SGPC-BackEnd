@@ -59,10 +59,12 @@ public class SecurityConfigurations
                         requestMatchers(HttpMethod.GET,"/api/patrimonio/listar").hasRole("USER").
                         requestMatchers(HttpMethod.GET,"/api/patrimonio/estado/listar").hasRole("USER").
                         requestMatchers(HttpMethod.GET,"/api/patrimonio/tipo/listar").hasRole("USER").
-                        requestMatchers(HttpMethod.GET,"/api/patrimonio/complexo/listar").hasRole("USER").
-                        requestMatchers(HttpMethod.GET,"/api/patrimonio/predio/listar").hasRole("USER").
-                        requestMatchers(HttpMethod.GET,"/api/patrimonio/andar/listar").hasRole("USER").
-                        requestMatchers(HttpMethod.GET,"/api/patrimonio/comodo/listar").hasRole("USER").
+
+                        requestMatchers(HttpMethod.GET,"/api/localidade/complexo/listar").hasRole("USER").
+                        requestMatchers(HttpMethod.GET,"/api/localidade/predio/listar").hasRole("USER").
+                        requestMatchers(HttpMethod.GET,"/api/localidade/andar/listar").hasRole("USER").
+                        requestMatchers(HttpMethod.GET,"/api/localidade/comodo/listar").hasRole("USER").
+
                         requestMatchers(HttpMethod.GET,"/api/patrimonio/computador/listar").hasRole("USER").
 
 
