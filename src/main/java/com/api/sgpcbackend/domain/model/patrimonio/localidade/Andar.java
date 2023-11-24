@@ -23,4 +23,9 @@ public class Andar
     @ManyToOne
     @JoinColumn(name = "predio")
     private Predio predio;
+
+    public Andar(Short id)
+    {
+        this.id = id;
+    }
 }

@@ -6,9 +6,17 @@ import com.api.sgpcbackend.domain.model.patrimonio.Computador;
 import com.api.sgpcbackend.domain.dto.patrimonio.ComputadorCadastroDTO;
 import com.api.sgpcbackend.domain.model.patrimonio.Patrimonio;
 import com.api.sgpcbackend.domain.dto.patrimonio.PatrimonioCadastroDTO;
+import com.api.sgpcbackend.domain.model.patrimonio.localidade.Andar;
+import com.api.sgpcbackend.domain.model.patrimonio.localidade.Comodo;
+import com.api.sgpcbackend.domain.model.patrimonio.localidade.Complexo;
+import com.api.sgpcbackend.domain.model.patrimonio.localidade.Predio;
 import com.api.sgpcbackend.domain.roles.EstadoPatrimonio;
 import com.api.sgpcbackend.domain.roles.TipoPatrimonio;
-import com.api.sgpcbackend.repository.*;
+import com.api.sgpcbackend.repository.localidade.AndarRepository;
+import com.api.sgpcbackend.repository.localidade.ComodoRepository;
+import com.api.sgpcbackend.repository.localidade.ComplexoRepository;
+import com.api.sgpcbackend.repository.localidade.PredioRepository;
+import com.api.sgpcbackend.repository.patrimonio.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -29,6 +37,18 @@ public class PatrimonioController
 
     @Autowired
     private EstadoPatrimoniosRepository estadoPatrimonioRepository;
+
+    @Autowired
+    private ComplexoRepository complexoRepository;
+
+    @Autowired
+    private PredioRepository predioRepository;
+
+    @Autowired
+    private AndarRepository andarRepository;
+
+    @Autowired
+    private ComodoRepository comodoRepository;
 
     @Autowired
     private TipoPatrimonioRepository tipoPatrimonioRepository;
@@ -55,7 +75,6 @@ public class PatrimonioController
     @GetMapping("/listar")
     public ResponseEntity<List<PatrimonioListarDTO>> listar()
     {
-
         return ResponseEntity.ok(dtoRepository.findAll());
     }
 
@@ -108,7 +127,7 @@ public class PatrimonioController
     }
 
     @PostMapping("/computador/cadastrar")
-    public ResponseEntity<String> cadastrar_pc(@RequestBody @Valid ComputadorCadastroDTO dto)
+    public ResponseEntity<String> cadastrarComputador(@RequestBody @Valid ComputadorCadastroDTO dto)
     {
         Computador computador = new Computador(dto);
 
@@ -123,7 +142,7 @@ public class PatrimonioController
     }
 
     @PostMapping("/computador/cadastrar_lista")
-    public ResponseEntity<String> cadastrar_pc(@RequestBody @Valid List<ComputadorCadastroDTO> dtos)
+    public ResponseEntity<String> cadastrarComputadores(@RequestBody @Valid List<ComputadorCadastroDTO> dtos)
     {
         for (ComputadorCadastroDTO dto: dtos)
         {
@@ -142,17 +161,39 @@ public class PatrimonioController
         return new ResponseEntity<>("Computadores cadastrados com sucesso", HttpStatus.CREATED);
     }
 
-    @GetMapping("/estados_patrimonio")
-    ResponseEntity<List<EstadoPatrimonio>> estados_patrimonio()
+    @GetMapping("/estado/listar")
+    ResponseEntity<List<EstadoPatrimonio>> estadosPatrimonio()
     {
         return ResponseEntity.ok(estadoPatrimonioRepository.findAll());
     }
 
-    @GetMapping("/tipos_patrimonio")
-    ResponseEntity<List<TipoPatrimonio>> tipos_patrimonio()
+    @GetMapping("/tipo/listar")
+    ResponseEntity<List<TipoPatrimonio>> tiposPatrimonio()
     {
         return ResponseEntity.ok(tipoPatrimonioRepository.findAll());
     }
 
+    @GetMapping("/complexo/listar")
+    ResponseEntity<List<Complexo>> listarComplexos()
+    {
+        return ResponseEntity.ok(complexoRepository.findAll());
+    }
 
+    @GetMapping("/predio/listar")
+    ResponseEntity<List<Predio>> listarPredios(@RequestParam Short complexo)
+    {
+        return ResponseEntity.ok(predioRepository.findAllByComplexo(new Complexo(complexo)));
+    }
+
+    @GetMapping("/Andar/listar")
+    ResponseEntity<List<Andar>> listarAndares(@RequestParam Short predio)
+    {
+        return ResponseEntity.ok(andarRepository.findAllByPredio(new Predio(predio)));
+    }
+
+    @GetMapping("/Comodo/listar")
+    ResponseEntity<List<Comodo>> listarComodos(@RequestParam Short andar)
+    {
+        return ResponseEntity.ok(comodoRepository.findAllByAndar(new Andar(andar)));
+    }
 }

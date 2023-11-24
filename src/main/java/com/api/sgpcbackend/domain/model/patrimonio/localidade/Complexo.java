@@ -19,4 +19,8 @@ public class Complexo
 
     @Column(name = "nome")
     private String nome;
+
+    public Complexo(Short id){
+        this.id = id;
+    }
 }

@@ -23,4 +23,8 @@ public class Predio
     @ManyToOne
     @JoinColumn(name = "complexo")
     private Complexo complexo;
+
+    public Predio(Short id){
+        this.id = id;
+    }
 }
