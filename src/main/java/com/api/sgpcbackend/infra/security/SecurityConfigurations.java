@@ -65,6 +65,13 @@ public class SecurityConfigurations
                         requestMatchers(HttpMethod.GET,"/api/localidade/andar/listar").hasRole("USER").
                         requestMatchers(HttpMethod.GET,"/api/localidade/comodo/listar").hasRole("USER").
 
+                        requestMatchers(HttpMethod.GET,"/api/pc_specs/modelo/listar").hasRole("USER").
+                        requestMatchers(HttpMethod.GET,"/api/pc_specs/sistema_operacional/listar").hasRole("USER").
+                        requestMatchers(HttpMethod.GET,"/api/pc_specs/ram/listar").hasRole("USER").
+                        requestMatchers(HttpMethod.GET,"/api/pc_specs/ram_ddr/listar").hasRole("USER").
+                        requestMatchers(HttpMethod.GET,"/api/pc_specs/hd/listar").hasRole("USER").
+
+
                         requestMatchers(HttpMethod.GET,"/api/patrimonio/computador/listar").hasRole("USER").
 
 

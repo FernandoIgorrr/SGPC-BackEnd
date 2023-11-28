@@ -6,11 +6,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "ram_ddr_pc")
+@Table(name = "ram_pc")
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
-public class RamDDR
+public class RAM
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,7 @@ public class RamDDR
     @Column(name = "descricao")
     private String descricao;
 
-    public RamDDR(Short id)
+    public RAM(Short id)
     {
         this.id = id;
     }

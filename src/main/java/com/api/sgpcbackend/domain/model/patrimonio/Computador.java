@@ -38,11 +38,11 @@ public class Computador extends Patrimonio
 
     @ManyToOne
     @JoinColumn(name = "ram")
-    private Ram ram;
+    private RAM ram;
 
     @ManyToOne
     @JoinColumn(name = "ram_ddr")
-    private RamDDR ram_ddr;
+    private RAMDDR ram_ddr;
 
     @ManyToOne
     @JoinColumn(name = "hd")
@@ -62,8 +62,8 @@ public class Computador extends Patrimonio
         serial              = dto.serial();
         modelo              = new Modelo(dto.modelo());
         sistema_operacional = new SistemaOperacional(dto.sistema_operacional());
-        ram                 = new Ram(dto.ram());
-        ram_ddr             = new RamDDR(dto.ram_ddr());
+        ram                 = new RAM(dto.ram());
+        ram_ddr             = new RAMDDR(dto.ram_ddr());
         hd                  = new HD(dto.hd());
     }
 }
