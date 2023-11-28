@@ -57,6 +57,7 @@ public class SecurityConfigurations
 
 
                         requestMatchers(HttpMethod.GET,"/api/patrimonio/listar").hasRole("USER").
+                        requestMatchers(HttpMethod.GET,"/api/patrimonio/listar_por_complexo").hasRole("USER").
                         requestMatchers(HttpMethod.GET,"/api/patrimonio/estado/listar").hasRole("USER").
                         requestMatchers(HttpMethod.GET,"/api/patrimonio/tipo/listar").hasRole("USER").
 
