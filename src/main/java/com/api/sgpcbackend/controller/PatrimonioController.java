@@ -73,6 +73,24 @@ public class PatrimonioController
         return ResponseEntity.ok(dtoRepository.findAllByComplexo(complexo));
     }
 
+    @GetMapping("/listar_por_predio")
+    public ResponseEntity<List<PatrimonioListarDTO>> listarPorPredio(@RequestParam String predio)
+    {
+        return ResponseEntity.ok(dtoRepository.findAllByPredio(predio));
+    }
+
+    @GetMapping("/listar_por_andar")
+    public ResponseEntity<List<PatrimonioListarDTO>> listarPorAndar(@RequestParam String predio,@RequestParam String andar)
+    {
+        return ResponseEntity.ok(dtoRepository.findAllByPredioAndAndar(predio,andar));
+    }
+
+    @GetMapping("/listar_por_comodo")
+    public ResponseEntity<List<PatrimonioListarDTO>> listarPorComodo(@RequestParam String comodo)
+    {
+        return ResponseEntity.ok(dtoRepository.findAllByComodo(comodo));
+    }
+
     @GetMapping("/computador/listar")
     public ResponseEntity<List<ComputadorListarDTO>> listarComputador()
     {
