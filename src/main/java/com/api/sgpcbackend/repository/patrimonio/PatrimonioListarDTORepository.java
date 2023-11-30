@@ -11,5 +11,6 @@ public interface PatrimonioListarDTORepository extends JpaRepository<PatrimonioL
     List<PatrimonioListarDTO> findAllByComplexo(String complexo);
     List<PatrimonioListarDTO> findAllByPredio(String predio);
     List<PatrimonioListarDTO> findAllByPredioAndAndar(String predio,String andar);
+    List<PatrimonioListarDTO> findAllByPredioAndAndarAndComodo(String predio, String andar, String comodo);
     List<PatrimonioListarDTO> findAllByComodo(String comodo);
 }

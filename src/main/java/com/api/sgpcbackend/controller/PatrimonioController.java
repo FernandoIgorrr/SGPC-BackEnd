@@ -86,9 +86,9 @@ public class PatrimonioController
     }
 
     @GetMapping("/listar_por_comodo")
-    public ResponseEntity<List<PatrimonioListarDTO>> listarPorComodo(@RequestParam String comodo)
+    public ResponseEntity<List<PatrimonioListarDTO>> listarPorComodo(@RequestParam String predio,@RequestParam String andar, @RequestParam String comodo)
     {
-        return ResponseEntity.ok(dtoRepository.findAllByComodo(comodo));
+        return ResponseEntity.ok(dtoRepository.findAllByPredioAndAndarAndComodo(predio, andar, comodo));
     }
 
     @GetMapping("/computador/listar")
