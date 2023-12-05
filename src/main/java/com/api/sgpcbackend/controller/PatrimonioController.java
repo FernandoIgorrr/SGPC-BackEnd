@@ -53,14 +53,6 @@ public class PatrimonioController
 
     private Logger logger = LoggerFactory.getLogger(PatrimonioController.class);
 
-    @GetMapping("/exemplo")
-    public ResponseEntity<Patrimonio> getExemplo() {
-        Patrimonio model = new Patrimonio();
-        // Popule o modelo aqui
-        logger.info("JSON do objeto model: " + model);
-        return ResponseEntity.ok(model);
-    }
-
     @GetMapping("/listar")
     public ResponseEntity<List<PatrimonioListarDTO>> listar()
     {
@@ -95,6 +87,24 @@ public class PatrimonioController
     public ResponseEntity<List<ComputadorListarDTO>> listarComputador()
     {
         return ResponseEntity.ok(computadorDTORepository.findAll());
+    }
+
+    @GetMapping("/computador/listar_por_complexo")
+    public ResponseEntity<List<ComputadorListarDTO>> listarComputadorPorComplexo(@RequestParam String complexo)
+    {
+        return ResponseEntity.ok(computadorDTORepository.findAllByComplexo(complexo));
+    }
+
+    @GetMapping("/computador/listar_por_predio")
+    public ResponseEntity<List<ComputadorListarDTO>> listarComputadorPorPredio(@RequestParam String predio)
+    {
+        return ResponseEntity.ok(computadorDTORepository.findAllByPredio(predio));
+    }
+
+    @GetMapping("/computador/listar_por_andar")
+    public ResponseEntity<List<ComputadorListarDTO>> listarComputadorPorAndar(@RequestParam String predio,@RequestParam String andar)
+    {
+        return ResponseEntity.ok(computadorDTORepository.findAllByPredioAndAndar(predio,andar));
     }
 
     @PostMapping("/cadastrar")
