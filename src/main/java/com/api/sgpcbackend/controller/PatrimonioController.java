@@ -131,6 +131,17 @@ public class PatrimonioController
         return new ResponseEntity<>("Dados do patrimônio alterados com sucesso", HttpStatus.ACCEPTED);
     }
 
+    @PutMapping("/computador/atualizar")
+    @Transactional
+    public ResponseEntity<String> atualizarComputador(@RequestBody @Valid ComputadorCadastroDTO dto)
+    {
+        Computador computador = computadorRepository.getReferenceById(dto.id());
+
+        computador.atualizar(dto);
+
+        return new ResponseEntity<>("Dados do patrimônio (computador) alterados com sucesso", HttpStatus.ACCEPTED);
+    }
+
     @PostMapping("/cadastrar_lista")
     public ResponseEntity<String> cadastrar(@RequestBody @Valid List<PatrimonioCadastroDTO> dtos)
     {

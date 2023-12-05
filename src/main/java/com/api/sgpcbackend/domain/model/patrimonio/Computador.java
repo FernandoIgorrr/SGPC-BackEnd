@@ -1,6 +1,7 @@
 package com.api.sgpcbackend.domain.model.patrimonio;
 
 import com.api.sgpcbackend.domain.dto.patrimonio.ComputadorCadastroDTO;
+import com.api.sgpcbackend.domain.dto.patrimonio.PatrimonioCadastroDTO;
 import com.api.sgpcbackend.domain.model.patrimonio.computador.espec.*;
 import com.api.sgpcbackend.domain.model.patrimonio.localidade.Comodo;
 import com.api.sgpcbackend.domain.roles.EstadoPatrimonio;
@@ -65,5 +66,22 @@ public class Computador extends Patrimonio
         ram                 = new RAM(dto.ram());
         ram_ddr             = new RAMDDR(dto.ram_ddr());
         hd                  = new HD(dto.hd());
+    }
+
+    public void atualizar(ComputadorCadastroDTO dto)
+    {
+        setTombamento(dto.tombamento());
+        setDescricao(dto.descricao());
+        setEstado(new EstadoPatrimonio(dto.estado()));
+        //setAlienado(dto.alienado());
+
+        //----------------------------------------------------------------------
+
+        setSerial(dto.serial());
+        setModelo(new Modelo(dto.modelo()));
+        setSistema_operacional(new SistemaOperacional(dto.sistema_operacional()));
+        setRam(new RAM(dto.ram()));
+        setRam_ddr(new RAMDDR(dto.ram_ddr()));
+        setHd(new HD(dto.hd()));
     }
 }

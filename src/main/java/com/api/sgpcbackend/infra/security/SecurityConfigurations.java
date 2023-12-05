@@ -52,6 +52,7 @@ public class SecurityConfigurations
                         requestMatchers(HttpMethod.POST,"/api/patrimonio/cadastrar").hasRole("USER").
                         requestMatchers(HttpMethod.POST,"/api/patrimonio/atualizar").hasRole("USER").
                         requestMatchers(HttpMethod.POST,"/api/patrimonio/computador/cadastrar").hasRole("USER").
+                        requestMatchers(HttpMethod.POST,"/api/patrimonio/computador/atualizar").hasRole("USER").
 
                         requestMatchers(HttpMethod.POST,"/api/patrimonio/computador/cadastrar_lista").hasRole("USER").
 
