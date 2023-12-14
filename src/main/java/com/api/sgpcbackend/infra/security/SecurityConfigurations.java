@@ -30,43 +30,46 @@ public class SecurityConfigurations
                 sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).
                 authorizeHttpRequests(authorize -> authorize.
                         requestMatchers(HttpMethod.POST,"/api/auth/login").permitAll().
-                        requestMatchers(HttpMethod.GET,"/api/patrimonio/exemplo").permitAll().
+                        requestMatchers(HttpMethod.POST,"/api/usuario/usuario_dados").hasRole("USER").
+                        requestMatchers(HttpMethod.PUT,"/api/usuario/alterar_senha").hasRole("USER").
 
 
                         requestMatchers(HttpMethod.POST,"/api/bolsista/cadastrar").hasRole("ADMIN").
-                        //requestMatchers(HttpMethod.POST,"/api/bolsista/cadastrar").permitAll().
                         requestMatchers(HttpMethod.GET,"/api/bolsista/listar").hasRole("ADMIN").
-                        //requestMatchers(HttpMethod.POST,"/api/bolsista/listar").permitAll().
+                        requestMatchers(HttpMethod.GET,"/api/bolsista/tipo/listar").hasRole("USER").
+                        requestMatchers(HttpMethod.PUT,"/api/bolsista/bolsista/atualizar").hasRole("ADMIN").
 
-
-                        //requestMatchers(HttpMethod.POST,"/api/supervisor/cadastrar").hasRole("ADMIN").
-                        requestMatchers(HttpMethod.POST,"/api/supervisor/cadastrar").permitAll().
+                        requestMatchers(HttpMethod.POST,"/api/supervisor/cadastrar").hasRole("ADMIN").
                         requestMatchers(HttpMethod.POST,"/api/supervisor/listar").hasRole("ADMIN").
-                        //requestMatchers(HttpMethod.POST,"/api/supervisor/listar").permitAll().
-
 
                         requestMatchers(HttpMethod.GET,"/api/usuario/listar").hasRole("ADMIN").
-                        //requestMatchers(HttpMethod.GET,"/api/usuario/listar").permitAll().
-
 
                         requestMatchers(HttpMethod.POST,"/api/patrimonio/cadastrar").hasRole("USER").
                         requestMatchers(HttpMethod.POST,"/api/patrimonio/atualizar").hasRole("USER").
+                        requestMatchers(HttpMethod.PUT,"/api/patrimonio/alienar").hasRole("USER").
+                        requestMatchers(HttpMethod.PUT,"/api/patrimonio/alienar/listar").hasRole("USER").
                         requestMatchers(HttpMethod.POST,"/api/patrimonio/computador/cadastrar").hasRole("USER").
-                        requestMatchers(HttpMethod.POST,"/api/patrimonio/computador/atualizar").hasRole("USER").
+                        requestMatchers(HttpMethod.PUT,"/api/patrimonio/computador/atualizar").hasRole("USER").
+                        requestMatchers(HttpMethod.PUT,"/api/patrimonio/manejar").hasRole("USER").
+                        requestMatchers(HttpMethod.GET,"/api/patrimonio/get_patrimonio").hasRole("USER").
 
                         requestMatchers(HttpMethod.POST,"/api/patrimonio/computador/cadastrar_lista").hasRole("USER").
 
 
                         requestMatchers(HttpMethod.GET,"/api/patrimonio/listar").hasRole("USER").
+                        requestMatchers(HttpMethod.GET,"/api/patrimonio/listarr").hasRole("USER").
                         requestMatchers(HttpMethod.GET,"/api/patrimonio/listar_por_complexo").hasRole("USER").
                         requestMatchers(HttpMethod.GET,"/api/patrimonio/listar_por_predio").hasRole("USER").
                         requestMatchers(HttpMethod.GET,"/api/patrimonio/listar_por_andar").hasRole("USER").
                         requestMatchers(HttpMethod.GET,"/api/patrimonio/listar_por_comodo").hasRole("USER").
+                        requestMatchers(HttpMethod.GET,"/api/patrimonio/listar_por_tipo").hasRole("USER").
                         requestMatchers(HttpMethod.GET,"/api/patrimonio/computador/listar_por_complexo").hasRole("USER").
                         requestMatchers(HttpMethod.GET,"/api/patrimonio/computador/listar_por_predio").hasRole("USER").
                         requestMatchers(HttpMethod.GET,"/api/patrimonio/computador/listar_por_andar").hasRole("USER").
                         requestMatchers(HttpMethod.GET,"/api/patrimonio/estado/listar").hasRole("USER").
                         requestMatchers(HttpMethod.GET,"/api/patrimonio/tipo/listar").hasRole("USER").
+
+                        requestMatchers(HttpMethod.GET,"/api/manejo/listar").hasRole("USER").
 
                         requestMatchers(HttpMethod.GET,"/api/localidade/complexo/listar").hasRole("USER").
                         requestMatchers(HttpMethod.GET,"/api/localidade/predio/listar").hasRole("USER").
@@ -81,6 +84,14 @@ public class SecurityConfigurations
 
 
                         requestMatchers(HttpMethod.GET,"/api/patrimonio/computador/listar").hasRole("USER").
+
+                        requestMatchers(HttpMethod.POST,"/api/chamado/cadastrar").hasRole("USER").
+                        requestMatchers(HttpMethod.PUT,"/api/chamado/fechar").hasRole("USER").
+                        requestMatchers(HttpMethod.PUT,"/api/chamado/alterar").hasRole("USER").
+                        requestMatchers(HttpMethod.GET,"/api/chamado/listar").hasRole("USER").
+                        requestMatchers(HttpMethod.GET,"/api/chamado/listar_por_estado").hasRole("USER").
+                        requestMatchers(HttpMethod.GET,"/api/chamado/estado/listar").hasRole("USER").
+                        requestMatchers(HttpMethod.GET,"/api/chamado/tipo/listar").hasRole("USER").
 
 
                         anyRequest().authenticated()).

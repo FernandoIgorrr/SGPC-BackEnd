@@ -19,8 +19,7 @@ import java.io.Serial;
 @Table(name = "patrimonio_pc")
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-//@DiscriminatorValue(value = "2205")
+//@EqualsAndHashCode(callSuper = true)
 public class Computador extends Patrimonio
 {
     @Serial

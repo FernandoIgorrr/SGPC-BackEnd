@@ -1,33 +1,29 @@
 package com.api.sgpcbackend.controller;
 
-import com.api.sgpcbackend.domain.dto.patrimonio.ComputadorListarDTO;
-import com.api.sgpcbackend.domain.dto.patrimonio.PatrimonioListarDTO;
+import com.api.sgpcbackend.domain.dto.patrimonio.*;
+import com.api.sgpcbackend.domain.model.chamado.Chamado;
+import com.api.sgpcbackend.domain.model.chamado.EstadoChamado;
+import com.api.sgpcbackend.domain.model.chamado.TipoChamado;
+import com.api.sgpcbackend.domain.model.patrimonio.Alienamento;
 import com.api.sgpcbackend.domain.model.patrimonio.Computador;
-import com.api.sgpcbackend.domain.dto.patrimonio.ComputadorCadastroDTO;
+import com.api.sgpcbackend.domain.model.patrimonio.Manejo;
 import com.api.sgpcbackend.domain.model.patrimonio.Patrimonio;
-import com.api.sgpcbackend.domain.dto.patrimonio.PatrimonioCadastroDTO;
-import com.api.sgpcbackend.domain.model.patrimonio.localidade.Andar;
 import com.api.sgpcbackend.domain.model.patrimonio.localidade.Comodo;
-import com.api.sgpcbackend.domain.model.patrimonio.localidade.Complexo;
-import com.api.sgpcbackend.domain.model.patrimonio.localidade.Predio;
 import com.api.sgpcbackend.domain.roles.EstadoPatrimonio;
 import com.api.sgpcbackend.domain.roles.TipoPatrimonio;
-import com.api.sgpcbackend.repository.localidade.AndarRepository;
-import com.api.sgpcbackend.repository.localidade.ComodoRepository;
-import com.api.sgpcbackend.repository.localidade.ComplexoRepository;
-import com.api.sgpcbackend.repository.localidade.PredioRepository;
+import com.api.sgpcbackend.repository.ChamadoRepository;
 import com.api.sgpcbackend.repository.patrimonio.*;
+import com.api.sgpcbackend.repository.patrimonio.AlienamentoListarDTORepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/patrimonio")
@@ -35,6 +31,15 @@ public class PatrimonioController
 {
     @Autowired
     private PatrimonioRepository repository;
+
+    @Autowired
+    private ManejoRepository manejoRepository;
+
+    @Autowired
+    private AlienamentoListarDTORepository  alienamentoListarDTORepository;
+
+    @Autowired
+    private AlienamentoRepository alienamentoRepository;
 
     @Autowired
     private EstadoPatrimoniosRepository estadoPatrimonioRepository;
@@ -51,12 +56,70 @@ public class PatrimonioController
     @Autowired
     private ComputadorListarDTORepository computadorDTORepository;
 
-    private Logger logger = LoggerFactory.getLogger(PatrimonioController.class);
+
+
+    //private Logger logger = LoggerFactory.getLogger(PatrimonioController.class);
+
+//    @PutMapping("/atualizar")
+//    @Transactional
+//    public ResponseEntity<String> atualizssar(@RequestBody @Valid PatrimonioCadastroDTO dto)
+//    {
+//        Patrimonio patrimonio = repository.getReferenceById(dto.id());
+//
+//        patrimonio.atualizar(dto);
+//
+//
+//        return new ResponseEntity<>("Dados do patrimônio alterados com sucesso", HttpStatus.ACCEPTED);
+//    }
+
+    @PutMapping("/manejar")
+    @Transactional
+    public ResponseEntity<String> manejar(@RequestBody @Valid ManejoCadastroDTO dto){
+
+        Patrimonio patrimonio = repository.getReferenceById(dto.patrimonio());
+
+        patrimonio.setLocalidade(new Comodo(dto.comodo_posterior()));
+
+        _manejar(dto);
+
+        return new ResponseEntity<>("Manejo feito com sucesso", HttpStatus.CREATED);
+    }
+
+    @PostMapping
+    private void _manejar(@RequestBody ManejoCadastroDTO dto){
+        Manejo manejo = new Manejo(dto);
+        manejoRepository.save(manejo);
+    }
 
     @GetMapping("/listar")
     public ResponseEntity<List<PatrimonioListarDTO>> listar()
     {
         return ResponseEntity.ok(dtoRepository.findAll());
+    }
+
+    @GetMapping("/listarr")
+    public ResponseEntity<List<Patrimonio>> listarr()
+    {
+        return ResponseEntity.ok(repository.findAll());
+    }
+
+    @GetMapping("/alienar/listar")
+    public ResponseEntity<List<AlienamentoListarDTO>> listarAlienamentos()
+    {
+        return ResponseEntity.ok(alienamentoListarDTORepository.findAll());
+    }
+    @GetMapping("/get_patrimonio")
+    public ResponseEntity<Optional<Patrimonio>> getPatrimonio(@RequestParam @Valid UUID id){
+
+        Optional<Patrimonio> optionalPatrimonio = repository.getPatrimonioById(id);
+
+       // return ResponseEntity.ok("DEU CERTO " + patrimonio.getTombamento());
+        if(optionalPatrimonio.isEmpty()){
+            return ResponseEntity.ofNullable(optionalPatrimonio);
+        }
+        return ResponseEntity.ok(optionalPatrimonio);
+
+        //return  ResponseEntity.ok(repository.getReferenceById(id));
     }
 
     @GetMapping("/listar_por_complexo")
@@ -66,21 +129,26 @@ public class PatrimonioController
     }
 
     @GetMapping("/listar_por_predio")
-    public ResponseEntity<List<PatrimonioListarDTO>> listarPorPredio(@RequestParam String predio)
+    public ResponseEntity<List<PatrimonioListarDTO>> listarPorPredio(@RequestParam String complexo,@RequestParam String predio)
     {
-        return ResponseEntity.ok(dtoRepository.findAllByPredio(predio));
+        return ResponseEntity.ok(dtoRepository.findAllByComplexoAndPredio(complexo,predio));
     }
 
     @GetMapping("/listar_por_andar")
-    public ResponseEntity<List<PatrimonioListarDTO>> listarPorAndar(@RequestParam String predio,@RequestParam String andar)
+    public ResponseEntity<List<PatrimonioListarDTO>> listarPorAndar(@RequestParam String complexo, @RequestParam String predio,@RequestParam String andar)
     {
-        return ResponseEntity.ok(dtoRepository.findAllByPredioAndAndar(predio,andar));
+        return ResponseEntity.ok(dtoRepository.findAllByComplexoAndPredioAndAndar(complexo,predio,andar));
     }
 
     @GetMapping("/listar_por_comodo")
-    public ResponseEntity<List<PatrimonioListarDTO>> listarPorComodo(@RequestParam String predio,@RequestParam String andar, @RequestParam String comodo)
+    public ResponseEntity<List<PatrimonioListarDTO>> listarPorComodo(@RequestParam String complexo,@RequestParam String predio,@RequestParam String andar, @RequestParam String comodo)
     {
-        return ResponseEntity.ok(dtoRepository.findAllByPredioAndAndarAndComodo(predio, andar, comodo));
+        return ResponseEntity.ok(dtoRepository.findAllByComplexoAndPredioAndAndarAndComodo(complexo, predio, andar, comodo));
+    }
+    @GetMapping("/listar_por_tipo")
+    public ResponseEntity<List<PatrimonioListarDTO>> listarPorTipo(@RequestParam String tipo)
+    {
+        return ResponseEntity.ok(dtoRepository.findAllByTipo(tipo));
     }
 
     @GetMapping("/computador/listar")
@@ -130,6 +198,20 @@ public class PatrimonioController
 
         return new ResponseEntity<>("Dados do patrimônio alterados com sucesso", HttpStatus.ACCEPTED);
     }
+
+    @PutMapping("/alienar")
+    @Transactional
+    public ResponseEntity<String> alienar(@RequestBody @Valid AlienamentoCadastroDTO dto)
+    {
+        Patrimonio patrimonio = repository.getReferenceById(dto.patrimonio());
+        Alienamento alienamento = new Alienamento(dto);
+        patrimonio.setAlienado(true);
+        alienamentoRepository.save(alienamento);
+
+        return new ResponseEntity<>("Patrimônio alienado com sucesso", HttpStatus.ACCEPTED);
+    }
+
+
 
     @PutMapping("/computador/atualizar")
     @Transactional
@@ -205,4 +287,5 @@ public class PatrimonioController
     ResponseEntity<List<TipoPatrimonio>> tiposPatrimonio() {
         return ResponseEntity.ok(tipoPatrimonioRepository.findAll());
     }
+
 }

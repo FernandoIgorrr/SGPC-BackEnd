@@ -41,9 +41,17 @@ public class Bolsista extends Usuario
         email           = dto.email();
         telefone        = dto.telefone();
         atvio           = true;
-        //tipo_usuario    = new TipoUsuario((short)2);
         data_chegada    = dto.data_chegada();
-
         tipo_bolsista = new TipoBolsista(dto.tipo_bolsista());
+    }
+
+    public void atualizar(BolsistaCadastroDTO dto){
+
+        setMatricula(dto.matricula());
+        setTipo_bolsista(new TipoBolsista(dto.tipo_bolsista()));
+
+        setNome(dto.nome());
+        setEmail(dto.email());
+        setTelefone(dto.telefone());
     }
 }

@@ -9,8 +9,8 @@ import java.util.UUID;
 public interface PatrimonioListarDTORepository extends JpaRepository<PatrimonioListarDTO, UUID>
 {
     List<PatrimonioListarDTO> findAllByComplexo(String complexo);
-    List<PatrimonioListarDTO> findAllByPredio(String predio);
-    List<PatrimonioListarDTO> findAllByPredioAndAndar(String predio,String andar);
-    List<PatrimonioListarDTO> findAllByPredioAndAndarAndComodo(String predio, String andar, String comodo);
-    List<PatrimonioListarDTO> findAllByComodo(String comodo);
+    List<PatrimonioListarDTO> findAllByComplexoAndPredio(String complexo, String predio);
+    List<PatrimonioListarDTO> findAllByComplexoAndPredioAndAndar(String complexo,String predio,String andar);
+    List<PatrimonioListarDTO> findAllByComplexoAndPredioAndAndarAndComodo(String complexo, String predio, String andar, String comodo);
+    List<PatrimonioListarDTO> findAllByTipo(String tipo);
 }

@@ -9,4 +9,8 @@ import java.util.UUID;
 public interface PatrimonioRepository extends JpaRepository<Patrimonio, UUID>
 {
     public boolean existsAllByTombamento(String tombamento);
+
+    public Optional<Patrimonio> getPatrimonioById(UUID id);
+
+
 }

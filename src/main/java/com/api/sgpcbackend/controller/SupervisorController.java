@@ -51,7 +51,6 @@ public class SupervisorController
             return new ResponseEntity<>("Login já cadastrado", HttpStatus.CONFLICT);
 
         String senha_temporaria = PasswordService.gerarSenhaTemporaria();
-        System.out.println("\n\nSENHA TEMPORÁRIA:*******************\n" + senha_temporaria + "\n\n");
         supervisor.setSenha(encoder.encode(senha_temporaria));
         //supervisor.setAtvio(true);
 

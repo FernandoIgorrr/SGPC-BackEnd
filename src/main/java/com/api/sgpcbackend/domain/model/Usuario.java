@@ -1,5 +1,7 @@
 package com.api.sgpcbackend.domain.model;
 
+import com.api.sgpcbackend.domain.dto.BolsistaCadastroDTO;
+import com.api.sgpcbackend.domain.roles.TipoBolsista;
 import com.api.sgpcbackend.domain.roles.TipoUsuario;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
@@ -81,6 +83,11 @@ public class Usuario implements Serializable, UserDetails
             return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
 
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    public void alterarSenha(String novaSenha)
+    {
+        senha = novaSenha;
     }
 
     @Override

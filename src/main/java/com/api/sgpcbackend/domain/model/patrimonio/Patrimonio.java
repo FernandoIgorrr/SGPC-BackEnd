@@ -18,11 +18,9 @@ import java.util.UUID;
 @Table(name = "patrimonio")
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-//@DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.INTEGER)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Patrimonio implements Serializable
-{
+public class Patrimonio implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -31,7 +29,6 @@ public class Patrimonio implements Serializable
     @Column(name = "id")
     protected UUID id;
 
-    @NotNull(message = "É necessário preencher o campo tombamento")
     @Column(name = "tombamento", unique = true)
     protected String tombamento;
 
